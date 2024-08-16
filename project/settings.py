@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'Users',
     'Bloc',
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'two_factor',
     
+    
 
 ]
 
@@ -73,11 +75,16 @@ MIDDLEWARE = [
     'django_otp.middleware.OTPMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'  ,  # L'URL de votre application React
+    
+    "http://127.0.0.1:3000",
     
 
     
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
+
 ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
@@ -105,7 +112,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stage_esprit_3A',
+        'NAME': 'stage_esprit_33',
         'USER': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
@@ -157,6 +164,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+## User model
+AUTH_USER_MODEL = 'Users.AppUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
 
 
+CORS_ALLOW_CREDENTIALS = True
 
+# Ensure other CORS settings are configured properly
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+CORS_ALLOW_HEADERS = ['content-type', 'authorization', 'x-csrftoken']
+
+# If you're using CSRF protection, ensure the CSRF cookie is not secure in development
+CSRF_COOKIE_SECURE = False

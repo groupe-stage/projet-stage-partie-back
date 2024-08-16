@@ -19,11 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from two_factor.urls import urlpatterns as tf_urls
-from Users.api.views import  addUser, displayall, updateUsers, deleteUsers
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('Users.api.urls')), 
+    path('api/', include('Users.api.urls')),
     path('session/', include('Session.api.urls')), 
     path('module/', include('Module.api.urls')), 
     path('examen/', include('Examen.api.urls')), 

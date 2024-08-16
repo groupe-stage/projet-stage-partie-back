@@ -1,21 +1,47 @@
 from django.db import models
+from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from Surveillance.models import Surveillance 
 from Unite.models import Unite
 
-class Users(models.Model):
-    id_user = models.AutoField(primary_key=True)
-    nom_user = models.CharField(max_length=100)
-    prenom_user = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    mdp = models.CharField(max_length=128)  # Pour stocker le mot de passe, vous devriez en fait utiliser un champ dédié pour les mots de passe, mais pour l'exemple, nous utilisons CharField
+class AppUserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        if not email:
+            raise ValueError('An email is required.')
+        if not password:
+            raise ValueError('A password is required.')
+        email = self.normalize_email(email)
+        user = self.model(email=email)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, email, password=None):
+        if not email:
+            raise ValueError('An email is required.')
+        if not password:
+            raise ValueError('A password is required.')
+        user = self.create_user(email, password)
+        user.is_superuser = True
+        user.save()
+        return user
+
+class AppUser(AbstractBaseUser, PermissionsMixin):
+    user_id = models.AutoField(primary_key=True)
+    email = models.EmailField(max_length=50, unique=True)
+    username = models.CharField(max_length=50)
     cin = models.CharField(max_length=20)
     role = models.CharField(max_length=50)
-    id_surveillance = models.ForeignKey(Surveillance, on_delete=models.CASCADE)
     identifiant = models.CharField(max_length=50)
     roleRes = models.CharField(max_length=50, blank=True, null=True)
+    id_surveillance = models.ForeignKey(Surveillance, on_delete=models.CASCADE)
     id_unite = models.ForeignKey(Unite, on_delete=models.CASCADE)
     image_user = models.ImageField(upload_to='user_images/', blank=True, null=True)
-    
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    objects = AppUserManager()
 
     def __str__(self):
-        return self.nom_user
+        return self.username
