@@ -77,12 +77,16 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     
     "http://127.0.0.1:3000",
+    "http://localhost:3000",
+
     
 
     
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
+
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -186,3 +190,4 @@ CORS_ALLOW_HEADERS = ['content-type', 'authorization', 'x-csrftoken']
 
 # If you're using CSRF protection, ensure the CSRF cookie is not secure in development
 CSRF_COOKIE_SECURE = False
+

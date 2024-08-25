@@ -1,5 +1,5 @@
 from django.db import models
-#from Users.models import Users
+from Users.models import AppUser
 
 class Contrainte(models.Model):
     id_contrainte = models.AutoField(primary_key=True)
@@ -8,7 +8,7 @@ class Contrainte(models.Model):
     date_debut_contrainte = models.DateField()
     date_fin_contrainte = models.DateField()
     status_contrainte = models.CharField(max_length=255)
-    #id_user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
 
 
 
