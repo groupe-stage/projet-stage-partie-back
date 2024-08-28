@@ -5,18 +5,21 @@ from rest_framework.response import Response
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
+from rest_framework.decorators import api_view
+from Users.models import AppUser
+from django.shortcuts import get_object_or_404
 
 
 class UserRegister(APIView):
-	permission_classes = (permissions.AllowAny,)
-	def post(self, request):
-		clean_data = custom_validation(request.data)
-		serializer = UserRegisterSerializer(data=clean_data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.create(clean_data)
-			if user:
-				return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.AllowAny,)
+    
+    def post(self, request):
+        clean_data = custom_validation(request.data)
+        serializer = UserRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogin(APIView):
@@ -50,3 +53,37 @@ class UserView(APIView):
 		serializer = UserSerializer(request.user)
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+def displayall(request):
+    users = AppUser.objects.all()  # Retrieve all users from AppUser model
+    serializer = UserSerializer(users, many=True)  # Serialize the users
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'PUT'])
+def updateUsers(request, user_id=None):
+    user = get_object_or_404(AppUser, user_id=user_id)
+    if request.method == 'PUT':
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+
+
+@api_view(['DELETE', 'GET'])
+def deleteUsers(request, user_id=None):
+    if request.method == 'DELETE':
+        try:
+            user = AppUser.objects.get(user_id=user_id)  
+            user.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except AppUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'GET':
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)  # Method not allowed for GET requests
