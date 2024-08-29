@@ -1,6 +1,7 @@
 from django.db import models 
 from Salle.models import Salle
 
+
 class Surveillance(models.Model):
     id_surveillance = models.AutoField(primary_key=True)
     date_surveillance = models.DateField()

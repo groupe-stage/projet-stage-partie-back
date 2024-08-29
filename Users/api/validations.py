@@ -10,8 +10,7 @@ def custom_validation(data):
     cin = data.get('cin', '').strip()
     role = data.get('role', '').strip()
     identifiant = data.get('identifiant', '').strip()
-    id_surveillance = data.get('id_surveillance')
-    id_unite = data.get('id_unite')
+    quota =data.get('quota','').strip()
     
     if not email or UserModel.objects.filter(email=email).exists():
         raise ValidationError('Choose another email')

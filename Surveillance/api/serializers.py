@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Surveillance
+from Surveillance.models import Surveillance
 
 class SurveillanceSerializer(serializers.ModelSerializer):
     class Meta:

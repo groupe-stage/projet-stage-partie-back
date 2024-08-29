@@ -8,7 +8,7 @@ class Salle(models.Model):
     capacite = models.IntegerField()
     dispo = models.BooleanField(default=True)
     id_bloc = models.ForeignKey(Bloc, on_delete=models.CASCADE)
-    id_examen = models.ForeignKey(Examen, on_delete=models.CASCADE)
+    id_examen = models.ForeignKey(Examen,blank=True,null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nom_salle

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'Module',
     'django_otp',
     'django_otp.plugins.otp_totp',
+    'two_factor',
     
     
 
@@ -71,8 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django_otp.middleware.OTPMiddleware',
-   
+    'django_otp.middleware.OTPMiddleware',   
 ]
 CORS_ALLOWED_ORIGINS = [
     

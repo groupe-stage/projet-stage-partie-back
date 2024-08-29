@@ -34,6 +34,7 @@ urlpatterns = [
     path('Classe/', include('Classe.api.urls') ),
     path('bloc/', include('Bloc.api.urls') ),
     path('salle/', include('Salle.api.urls') ),
+    path('Surveillance/', include('Surveillance.api.urls') ),
 
 ]
 

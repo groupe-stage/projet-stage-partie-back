@@ -1,3 +1,51 @@
-from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
 
-# Create your views here.
+from Surveillance.models import Surveillance
+from .serializers import SurveillanceSerializer
+
+@api_view(['POST'])
+def addSurveillance(request):
+    serializer = SurveillanceSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def displayAllSurveillances(request):
+    surveillances = Surveillance.objects.all()
+    serializer = SurveillanceSerializer(surveillances, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET', 'PUT'])
+def updateSurveillance(request, id):
+    surveillance = get_object_or_404(Surveillance, id_surveillance=id)
+    if request.method == 'PUT':
+        serializer = SurveillanceSerializer(instance=surveillance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        serializer = SurveillanceSerializer(surveillance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['DELETE', 'GET'])
+def deleteSurveillance(request, id):
+    surveillance = get_object_or_404(Surveillance, id_surveillance=id)
+    if request.method == 'DELETE':
+        surveillance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'GET':
+        serializer = SurveillanceSerializer(surveillance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def getSurveillance(request, id):
+    surveillance = get_object_or_404(Surveillance, id_surveillance=id)
+    serializer = SurveillanceSerializer(surveillance)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+

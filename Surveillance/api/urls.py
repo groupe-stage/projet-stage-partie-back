@@ -1,6 +1,10 @@
 from django.urls import path
-'''from .views import DepartementList
+from . import views
 
 urlpatterns = [
-    path('api/users/', DepartementList.as_view(), name='user-list'),
-]'''
+    path('add-surveillance/', views.addSurveillance, name='add-surveillance'),
+    path('all-surveillances/', views.displayAllSurveillances, name='display-all-surveillances'),
+    path('update-surveillance/<int:id>/', views.updateSurveillance, name='update-surveillance'),
+    path('delete-surveillance/<int:id>/', views.deleteSurveillance, name='delete-surveillance'),
+    path('surveillance/<int:id>/', views.getSurveillance, name='get-surveillance'),
+]
