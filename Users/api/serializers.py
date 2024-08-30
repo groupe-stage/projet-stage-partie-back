@@ -19,7 +19,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.role = validated_data.get('role')
         user.roleRes = validated_data.get('roleRes')
         user.identifiant = validated_data.get('identifiant')
-        user.id_surveillance_id = validated_data.get('id_surveillance')
         user.id_unite_id = validated_data.get('id_unite')
         user.image_user = validated_data.get('image_user')
 
@@ -41,4 +40,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('user_id','email', 'username', 'cin', 'role', 'identifiant', 'id_surveillance', 'id_unite','roleRes','image_user','quota')
+        fields = ('user_id','email', 'username', 'cin', 'role', 'identifiant',  'id_unite','roleRes','image_user','quota')

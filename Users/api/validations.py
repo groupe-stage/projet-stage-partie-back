@@ -9,8 +9,7 @@ def custom_validation(data):
     password = data.get('password', '').strip()
     cin = data.get('cin', '').strip()
     role = data.get('role', '').strip()
-    identifiant = data.get('identifiant', '').strip()
-    quota =data.get('quota','').strip()
+    
     
     if not email or UserModel.objects.filter(email=email).exists():
         raise ValidationError('Choose another email')
@@ -27,8 +26,7 @@ def custom_validation(data):
     if not role:
         raise ValidationError('Role is required')
     
-    if not identifiant:
-        raise ValidationError('Identifiant is required')
+
     
     
 

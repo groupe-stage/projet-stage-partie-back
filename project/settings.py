@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'Contrainte',
     'Surveillance',
     'Module',
+    'Salle_examen',
+    'Module_niveau',
     'django_otp',
     'django_otp.plugins.otp_totp',
     'two_factor',

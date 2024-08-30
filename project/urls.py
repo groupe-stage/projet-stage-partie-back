@@ -35,6 +35,8 @@ urlpatterns = [
     path('bloc/', include('Bloc.api.urls') ),
     path('salle/', include('Salle.api.urls') ),
     path('Surveillance/', include('Surveillance.api.urls') ),
+    path('Module_niveau/', include('Module_niveau.api.urls') ),
+    path('Salle_examen/', include('Salle_examen.api.urls') ),
 
 ]
 

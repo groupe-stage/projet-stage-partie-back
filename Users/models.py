@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from Surveillance.models import Surveillance 
 from Unite.models import Unite
 
 class AppUserManager(BaseUserManager):
@@ -31,11 +30,10 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=50)
     cin = models.CharField(max_length=20)
-    quota = models.CharField(max_length=20)
+    quota = models.CharField(max_length=20,blank=True, null=True)
     role = models.CharField(max_length=50)
-    identifiant = models.CharField(max_length=50)
+    identifiant = models.CharField(max_length=50,blank=True, null=True)
     roleRes = models.CharField(max_length=50, blank=True, null=True)
-    id_surveillance = models.ForeignKey(Surveillance,blank=True,null=True, on_delete=models.CASCADE)
     id_unite = models.ForeignKey(Unite,blank=True,null=True, on_delete=models.CASCADE)
     image_user = models.ImageField(upload_to='user_images/', blank=True, null=True)
 
