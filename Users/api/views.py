@@ -76,14 +76,11 @@ def updateUsers(request, user_id=None):
 
 
 
-@api_view(['DELETE', 'GET'])
+@api_view(['DELETE'])
 def deleteUsers(request, user_id=None):
-    if request.method == 'DELETE':
-        try:
-            user = AppUser.objects.get(user_id=user_id)  
-            user.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except AppUser.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-    elif request.method == 'GET':
-        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)  # Method not allowed for GET requests
+    try:
+        user = AppUser.objects.get(user_id=user_id)
+        user.delete()
+        return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except AppUser.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)

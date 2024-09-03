@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
-
+from Unite.models import Unite
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
+    id_unite = serializers.PrimaryKeyRelatedField(queryset=Unite.objects.all())
     class Meta:
         model = UserModel
         fields = '__all__'
@@ -37,6 +38,7 @@ class UserLoginSerializer(serializers.Serializer):
 
 class UserSerializer(serializers.ModelSerializer):
     image_user = serializers.ImageField(max_length=None, use_url=True)
+    id_unite = serializers.PrimaryKeyRelatedField(queryset=Unite.objects.all())
 
     class Meta:
         model = UserModel

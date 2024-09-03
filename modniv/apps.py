@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ModuleNiveauConfig(AppConfig):
+class ModnivConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Module_niveau'
+    name = 'modniv'

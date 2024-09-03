@@ -55,10 +55,7 @@ INSTALLED_APPS = [
     'Surveillance',
     'Module',
     'Salle_examen',
-    'Module_niveau',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
-    'two_factor',
+    'modniv',
     
     
 
@@ -73,8 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django_otp.middleware.OTPMiddleware',   
+ 
 ]
 CORS_ALLOWED_ORIGINS = [
     
