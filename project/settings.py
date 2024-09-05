@@ -54,8 +54,8 @@ INSTALLED_APPS = [
     'Contrainte',
     'Surveillance',
     'Module',
-    'Salle_examen',
-    'modniv',
+    'modniv'
+  
     
     
 
@@ -70,13 +70,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
- 
+    'django.middleware.common.CommonMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
     
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-
     
 
     
@@ -84,7 +84,6 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -114,7 +113,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stage_esprit_33',
+        'NAME': 'stage_esprit',
         'USER': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
@@ -188,4 +187,3 @@ CORS_ALLOW_HEADERS = ['content-type', 'authorization', 'x-csrftoken']
 
 # If you're using CSRF protection, ensure the CSRF cookie is not secure in development
 CSRF_COOKIE_SECURE = False
-
