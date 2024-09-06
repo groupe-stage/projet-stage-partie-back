@@ -20,7 +20,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.role = validated_data.get('role')
         user.roleRes = validated_data.get('roleRes')
         user.identifiant = validated_data.get('identifiant')
-        user.id_unite_id = validated_data.get('id_unite')
+        user.id_unite = validated_data.get('id_unite')
         user.image_user = validated_data.get('image_user')
 
         user.save()

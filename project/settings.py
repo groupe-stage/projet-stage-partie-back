@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'Contrainte',
     'Surveillance',
     'Module',
-    'modniv'
+    'modniv',
+    'sallex'
   
     
     
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django_otp.middleware.OTPMiddleware',
+    
 ]
 CORS_ALLOWED_ORIGINS = [
     
@@ -180,9 +181,12 @@ REST_FRAMEWORK = {
 
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['content-type',
+    'authorization',
+    'x-csrftoken',]
 
 # Ensure other CORS settings are configured properly
-CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT','PATCH', 'DELETE', 'OPTIONS']
 CORS_ALLOW_HEADERS = ['content-type', 'authorization', 'x-csrftoken']
 
 # If you're using CSRF protection, ensure the CSRF cookie is not secure in development

@@ -34,6 +34,8 @@ urlpatterns = [
     path('bloc/', include('Bloc.api.urls') ),
     path('salle/', include('Salle.api.urls') ),
     path('modniv/', include('modniv.api.urls') ),
+    path('sallex/', include('sallex.api.urls') ),
+
 
 
 ]
