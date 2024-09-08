@@ -4,7 +4,7 @@ from Unite.models import Unite
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
-    id_unite = serializers.PrimaryKeyRelatedField(queryset=Unite.objects.all())
+    id_unite = serializers.PrimaryKeyRelatedField(queryset=Unite.objects.all(), required=False)
     class Meta:
         model = UserModel
         fields = '__all__'
@@ -20,7 +20,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.role = validated_data.get('role')
         user.roleRes = validated_data.get('roleRes')
         user.identifiant = validated_data.get('identifiant')
-        user.id_unite = validated_data.get('id_unite')
+        if 'id_unite' in validated_data:
+            user.id_unite = validated_data['id_unite']
         user.image_user = validated_data.get('image_user')
 
         user.save()
