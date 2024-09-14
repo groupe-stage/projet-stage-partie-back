@@ -6,4 +6,4 @@ class SalleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Salle
-        fields = ['id_salle', 'nom_salle', 'capacite', 'dispo', 'id_bloc', 'nom_bloc', 'id_examen']
+        fields = ['id_salle', 'nom_salle', 'capacite', 'dispo', 'id_bloc', 'nom_bloc']
