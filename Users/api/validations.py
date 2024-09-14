@@ -7,7 +7,6 @@ def custom_validation(data):
     email = data.get('email', '').strip()
     username = data.get('username', '').strip()
     password = data.get('password', '').strip()
-    cin = data.get('cin', '').strip()
     role = data.get('role', '').strip()
     
     
@@ -20,8 +19,7 @@ def custom_validation(data):
     if not username:
         raise ValidationError('Choose another username')
     
-    if not cin:
-        raise ValidationError('CIN is required')
+    
     
     if not role:
         raise ValidationError('Role is required')

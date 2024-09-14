@@ -191,3 +191,11 @@ CORS_ALLOW_HEADERS = ['content-type', 'authorization', 'x-csrftoken']
 
 # If you're using CSRF protection, ensure the CSRF cookie is not secure in development
 CSRF_COOKIE_SECURE = False
+
+DEBUG = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Par exemple pour Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'yosrbenamor2002@gmail.com'
+EMAIL_HOST_PASSWORD = 'qtfdlwqofqulajcn'

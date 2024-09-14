@@ -44,3 +44,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('user_id','email', 'username', 'cin', 'role', 'identifiant',  'id_unite','roleRes','image_user','quota')
+
+class ResetPasswordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(required=True, max_length=128)
