@@ -5,9 +5,9 @@ from Module.models import Module
 class Examen(models.Model):
     id_examen = models.AutoField(primary_key=True)
     nom_examen = models.CharField(max_length=255)
-    date_examen = models.DateField()
     duree_examen  = models.IntegerField()
     type_examen = models.CharField(max_length=255)
+    nbrclasse  = models.IntegerField()
     id_session = models.ForeignKey(Session, on_delete=models.CASCADE)
     id_module = models.ForeignKey(Module, on_delete=models.CASCADE)
 

@@ -37,6 +37,10 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     id_unite = models.ForeignKey(Unite,blank=True,null=True, on_delete=models.CASCADE)
     image_user = models.ImageField(upload_to='user_images/', blank=True, null=True)
 
+    is_staff = models.BooleanField(default=False)
+ 
+
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

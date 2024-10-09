@@ -89,7 +89,11 @@ def deleteUsers(request, user_id=None):
     except AppUser.DoesNotExist:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-
+@api_view(['GET'])
+def getonebyid(request, user_id):
+    user = get_object_or_404(AppUser, user_id=user_id)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
 
 class ForgotPassword(APIView):
     permission_classes = [AllowAny]

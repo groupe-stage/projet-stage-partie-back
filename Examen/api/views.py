@@ -49,3 +49,9 @@ def deleteExamen(request, id_examen=None):
     elif request.method == 'GET':
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)  # Method not allowed for GET requests
 
+
+@api_view(['GET'])
+def get_examen_by_id(request, id_examen):
+    examen = get_object_or_404(Examen, pk=id_examen)
+    serializer = ExamenSerializer(examen)
+    return Response({'nom_examen': serializer.data['nom']})

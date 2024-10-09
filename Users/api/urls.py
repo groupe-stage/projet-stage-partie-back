@@ -9,6 +9,7 @@ urlpatterns = [
     path('displayall/', views.displayall),
     path('updateusers/<int:user_id>/', views.updateUsers,name='updateUsers'),
     path('deleteusers/<int:user_id>/', views.deleteUsers, name='deleteUsers'),
+    path('getonebyid/<int:user_id>/', views.getonebyid, name='getonebyid'),
     path('forgotPassword', views.ForgotPassword.as_view(), name='forgotPassword'),
     path('resetPassword/<int:user_id>/<str:token>/', views.ResetPassword.as_view(), name='resetPassword'),
 

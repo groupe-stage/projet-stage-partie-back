@@ -43,3 +43,41 @@ def deleteSalle(request, id_salle=None):
             return Response(status=status.HTTP_404_NOT_FOUND)
     elif request.method == 'GET':
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['GET'])
+def getOneById(request, id_salle=None):
+    # Récupérer la salle par son id
+    salle = get_object_or_404(Salle, id_salle=id_salle)
+    
+    # Créer un dictionnaire contenant les informations de la salle et le nom de l'examen
+    salle_data = {
+        'id_salle': salle.id_salle,
+        'nom_salle': salle.nom_salle,
+        'capacite': salle.capacite,
+        'dispo': salle.dispo,
+        'id_bloc': salle.id_bloc.id,  # Ou afficher d'autres champs de Bloc si nécessaire
+        'nom_examen': salle.get_nom_examen()  # Utilise la méthode pour obtenir le nom de l'examen
+    }
+
+    return Response(salle_data, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def getExamenById(request, id_salle=None):
+    # Récupérer la salle par son ID
+    salle = get_object_or_404(Salle, id_salle=id_salle)
+    
+    # Récupérer le nom de l'examen à partir de la méthode de la salle
+    nom_examen = salle.get_nom_examen()
+
+    # Retourner uniquement le nom de l'examen
+    return Response({'nom_examen': nom_examen}, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def getsallebyid(request, id_salle):
+    user = get_object_or_404(Salle, id_salle=id_salle)
+    serializer = SalleSerializer(user)
+    return Response(serializer.data)

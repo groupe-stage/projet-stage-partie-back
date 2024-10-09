@@ -1,6 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from Unite.models import Unite
+from Surveillance.models import Surveillance
+from Salle.models import Salle
+
+
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -47,3 +51,17 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ResetPasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True, max_length=128)
+
+
+class SalleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Salle
+        fields = ['id_salle', 'nom']  # Inclure les champs nécessaires
+
+class SurveillanceSerializer(serializers.ModelSerializer):
+    user = UserSerializer(source='user_id', read_only=True)
+    salle = UserSerializer(source='id_salle', read_only=True)
+
+    class Meta:
+        model = Surveillance
+        fields = ['id_surveillance', 'date_surveillance', 'user', 'salle']
