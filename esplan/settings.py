@@ -116,7 +116,7 @@ WSGI_APPLICATION = 'esplan.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'esprit_stage4',
+        'NAME': 'esprit_stage_final',
         'USER': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
